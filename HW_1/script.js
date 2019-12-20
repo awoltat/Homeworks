@@ -69,16 +69,22 @@ let nissanQashqai = {
 
 //#3
 let getVehicleAttributes = () => {
-    console.log(kiaRio)
+    console.log(kiaRio);
 };
-getVehicleAttributes()
+getVehicleAttributes();
+
+//#4
+kiaRio.getAttributes = function() {
+    console.log(kiaRio);
+};
+kiaRio.getAttributes();
 
 //#5
 const arr = [
     kiaRio, toyotaCorolla, mazda,hondaAccord, nissanQashqai
 ];
 
-const getCarByIndex = (num) => {
-    console.log(arr[num])
+const getCarByIndex = (index) => {
+    console.log(arr[index])
 };
-getCarByIndex(1);
+getCarByIndex(4);
