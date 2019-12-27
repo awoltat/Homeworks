@@ -61,14 +61,14 @@ console.log(getMiddleSalary(emplyeeConstructArr));
 
 //№6
 
-function getRandomNumber(max) { //Создает функцию для получения рандомного числа
-    return Math.floor(Math.random() * Math.floor(max)); //генерируем
+function getRandomNumber(max) {
+    return Math.floor(Math.random() * Math.floor(max));
 };
 
-function getRandomEmploee(arr) { //создаем функцию которая возвращает случайного работника
-    const randomIndex = getRandomNumber(arr.length); //получаем случайное число. arr.length - верхняя граница (не включительно, поэтому просто arr.length а не arr.length-1)
+function getRandomEmploee(arr) {
+    const randomIndex = getRandomNumber(arr.length);
 
-    return arr[randomIndex]; //возвращем случайного работника
+    return arr[randomIndex];
 };
 
-console.log(getRandomEmploee(emplyeeConstructArr)); //вызываем функцию и передаем нужный массив
+console.log(getRandomEmploee(emplyeeConstructArr));
