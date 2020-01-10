@@ -113,5 +113,5 @@ function sortByCompanyType(inputArray) {
 
 console.log(sortByCompanyType(customerArray));
 
-// 6
+
 
