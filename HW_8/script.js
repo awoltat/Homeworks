@@ -1,8 +1,10 @@
+// 3
+
 let kids = [];
 
 class Kid{
     constructor({name, age, gender}){
-        this.id = this.uuidv4() // генерируем id
+        this.id = this.uuidv4(); // генерируем id
         this.name = name;
         this.age = age;
         this.gender = gender;
@@ -10,7 +12,7 @@ class Kid{
 
     uuidv4 = function () {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+            let r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
             return v.toString(16);
         });
     }
@@ -65,13 +67,7 @@ for (let key in kidsArr) {
 console.log(kids);
 
 const room = new Room(kids, 101);
-room.kidsCount // 4
-room.femaleCount // 1
-room.maleCount // 3
-room.lastKid  // Kid { id: 4, name: 'Mitya', age: 8, gender: 'male' }
-room.lastKid = { name: 'Kolya', age: 9, gender: 'male' } // Kid { id: 5, name: 'Kolya', age: 9, gender: 'male' }
-room.lastKid  // Kid { id: 5, name: 'Kolya', age: 9, gender: 'male' }
-room.kidsCount // 5
+
 console.log(room.getKidsCount() + ' детей');
 console.log(room.getFemaleCount() + ' девочка');
 console.log(room.getMaleCount() + ' мальчика');
