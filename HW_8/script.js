@@ -1,3 +1,14 @@
+// 1
+let param = 0;
+function parameters (parameter) {
+    param += parameter;
+    console.log(param);
+}
+
+console.log(parameters(3));
+console.log(parameters(5));
+console.log(parameters(228));
+
 // 3
 
 let kids = [];
