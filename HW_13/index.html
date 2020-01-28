@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+	      integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Lobster&display=swap&subset=cyrillic,cyrillic-ext"
+	      rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates:100,100i,200,200i,300,300i,400,400i,500,500i&display=swap"
+	      rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+	<title>Pizza Store</title>
+</head>
+<body>
+<div class="wrapper">
+	<header>
+		<div class="container">
+			<div class="navbar">
+				<div class="row navigation">
+					<div class="col logo-holder">
+						<div>
+							<a href="#"><img src="images/pizza_logo.png" alt="logo"></a>
+						</div>
+					</div>
+					<div class="form-holder col">
+						<form class="form-inline my-2 my-lg-0">
+							<input class="form-control mr-sm-2" type="search" onkeyup="onSearch(this.value)"
+							       placeholder="Search" aria-label="Search">
+							<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<section class="pizza-menu">
+		<div class="container">
+			<div class="title">
+				<h2>Меню:</h2>
+			</div>
+			<div class="select-price">
+				<select class="custom-select" id="select">
+					<option selected>Сортировать:</option>
+					<option value="1">По возрастанию цены</option>
+					<option value="2">По убыванию цены</option>
+				</select>
+			</div>
+			<div class="menu">
+			</div>
+		</div>
+	</section>
+	<footer>
+		<p>Copyright ©2020 All rights reserved</p>
+	</footer>
+</div>
+
+
+<script src="pizzaList.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
