@@ -28,8 +28,7 @@
 					</div>
 					<div class="form-holder col">
 						<form class="form-inline my-2 my-lg-0">
-							<input class="form-control mr-sm-2" type="search" onkeyup="onSearch(this.value)"
-							       placeholder="Search" aria-label="Search">
+							<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 							<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 						</form>
 					</div>
@@ -48,6 +47,23 @@
 					<option value="1">По возрастанию цены</option>
 					<option value="2">По убыванию цены</option>
 				</select>
+			</div>
+			<form class="price-range form-inline my-2 my-lg-0">
+				<h5>Укажите диапазон цены: </h5>
+				<input type="number" class="range form-control" id="from" placeholder="От: ">
+				<input type="number" class="range form-control" id="to" placeholder="До: ">
+				<button class="btn btn-outline-success my-2 my-sm-0" id="submit-btn" type="button">Submit</button>
+			</form>
+			<form class="calory-range form-inline my-2 my-lg-0">
+				<h5>Укажите диапазон калорий: </h5>
+				<input type="number" class="calory form-control" id="calory_from" placeholder="От: ">
+				<input type="number" class="calory form-control" id="calory_to" placeholder="До: ">
+				<button class="btn btn-outline-success my-2 my-sm-0" id="calory_submit-btn" type="button">Submit
+				</button>
+			</form>
+			<div class="button-holder">
+				<button class="btn btn-outline-success my-2 my-sm-0" id="reset" type="button">Сбросить все фильтры
+				</button>
 			</div>
 			<div class="menu">
 			</div>

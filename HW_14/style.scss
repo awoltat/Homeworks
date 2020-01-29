@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -35,6 +36,11 @@ header {
     align-items: center;
     justify-content: flex-end;
 
+    .form-control {
+      background-color: transparent;
+      color: #fff;
+    }
+
     form {
       flex-wrap: nowrap;
     }
@@ -43,20 +49,22 @@ header {
       color: #fff;
       border-color: #fff;
     }
-
   }
 }
+
 
 .pizza-menu {
   .select-price {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
   }
 
   select {
     margin: 3rem 0;
-    width: 20rem;
+    width: 15rem;
+    background-color: transparent;
+    color: #fff;
   }
 }
 
@@ -69,12 +77,90 @@ header {
     text-align: center;
     padding-top: 2.5rem;
   }
+
+}
+
+
+.price-range {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 0.5rem;
+
+  h5 {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-weight: 100;
+    color: #fff;
+  }
+
+  .form-control {
+    width: 5rem;
+  }
+
+  input {
+    display: flex;
+    flex-wrap: nowrap;
+    background-color: transparent;
+    color: #fff;
+    border-collapse: collapse;
+    margin: 0 0.5rem;
+  }
+
+  input:focus {
+    background-color: transparent;
+    color: #fff;
+  }
+
+  button {
+    color: #fff;
+    border-color: #fff;
+  }
+}
+
+.calory-range {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 0.5rem;
+
+  h5 {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-weight: 100;
+    color: #fff;
+  }
+
+  .form-control {
+    width: 5rem;
+  }
+
+  input {
+    display: flex;
+    flex-wrap: nowrap;
+    background-color: transparent;
+    color: #fff;
+    border-collapse: collapse;
+    margin: 0 0.5rem;
+  }
+
+  input:focus {
+    background-color: transparent;
+    color: #fff;
+  }
+
+  button {
+    color: #fff;
+    border-color: #fff;
+  }
+
+}
+
+.button-holder {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .menu {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin-bottom: 3.5rem;
 
   .pizzaCard {
@@ -139,6 +225,7 @@ header {
   .pizza_btn {
     display: flex;
     color: white;
+    margin-bottom: 1rem;
   }
 }
 
@@ -155,3 +242,8 @@ footer {
   }
 }
 
+.btn-fav {
+  color: white;
+  background-color: transparent;
+  border: none;
+}
