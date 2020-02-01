@@ -4,6 +4,8 @@ const constructor = document.querySelector('.wrapper-constructor');
 const pizzaConstructorElement = document.getElementsByClassName('constructor')[0];
 const createPizza = document.getElementsByClassName('create')[0];
 
+//_________________ 15 _____________//
+
 pizzaCardContainer.addEventListener('click', function (e) {
     const elemClassName = e.target.className;
     if (elemClassName === 'pizza-info' || elemClassName === 'icon-close') {
@@ -32,7 +34,7 @@ function onPizzaSaveClick() {
     for (let i = 0; i < compositionList.length; i++) {
         for (let j = 0; j < compositionsCheckboxes.length; j++) {
             if (compositionList[i].id === compositionsCheckboxes[j]) {
-                compositionNames.push(compositionList[i].name);  //!
+                compositionNames.push(compositionList[i].name);
                 pizzaPrice += compositionList[i].price;
                 pizzaCaloricity += compositionList[i].caloricity;
             }
@@ -167,6 +169,9 @@ const renderPizzaConstructor = () => {
     pizzaConstructorElement.innerHTML = template;
 };
 renderPizzaConstructor();
+
+
+///////////////////////////////////////////////////////////////////
 
 /////Дубликат массива с пиццами
 let filteredArr = [...pizzaList];
