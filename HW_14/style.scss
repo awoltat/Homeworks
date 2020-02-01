@@ -1,3 +1,38 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?t81gev');
+  src:  url('fonts/icomoon.eot?t81gev#iefix') format('embedded-opentype'),
+  url('fonts/icomoon.ttf?t81gev') format('truetype'),
+  url('fonts/icomoon.woff?t81gev') format('woff'),
+  url('fonts/icomoon.svg?t81gev#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-close:before {
+  content: "\e900";
+}
+
+
+
+
+
 
 * {
   margin: 0;
@@ -50,6 +85,11 @@ header {
       border-color: #fff;
     }
   }
+  .submit {
+    margin-right: 1rem;
+  }
+
+
 }
 
 
@@ -247,3 +287,186 @@ footer {
   background-color: transparent;
   border: none;
 }
+
+
+.pizza-info {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 3;
+  left: 0;
+  top: 0;
+  //display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.pizza-info_card {
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: 20px;
+  box-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.5);
+  color: white;
+  width: 70%;
+  height: 500px;
+  padding: 10px;
+
+  li {
+    list-style: none;
+  }
+}
+
+.exit-btn {
+  a {
+    text-decoration: none;
+    color: #a8a8a8;
+    font-size: 1.2rem;
+  }
+
+  a:hover {
+    box-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.5);
+  }
+}
+
+
+
+
+
+.info-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 20px;
+
+  .left-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h3 {
+      margin-bottom: 40px;
+      font-size: 2.5rem;
+      font-family: 'Lobster', cursive;
+    }
+
+    img {
+      width: 300px;
+    }
+
+  }
+
+  .right-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    span {
+      font-size: 2rem;
+      font-family: 'Lobster', cursive;
+    }
+  }
+}
+
+
+
+
+.wrapper-constructor {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 3;
+  left: 0;
+  top: 0;
+  justify-content: center;
+  align-items: center;
+  display: none;
+
+  .constructor {
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.5);
+    color: white;
+    width: 80%;
+    height: 700px;
+    padding: 10px;
+
+    .constructor-title {
+      text-align: center;
+    }
+
+    .nameOfNewPizza {
+      width: 20%;
+      margin-bottom: 1rem;
+    }
+
+    .content-holder {
+      display: flex;
+    }
+
+    .left-side {
+      width: 50%;
+      display: flex;
+      //padding: 1rem;
+
+      .image-container {
+        width: 100%;
+        padding: 1rem;
+        position: relative;
+        img {
+          width: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+
+        .component {
+          position: absolute;
+          z-index: 3;
+        }
+      }
+    }
+
+    .right-side {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+      //padding: 1rem;
+
+      .sous-holder {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .cheese-holder {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .meat-holder {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .veggie-holder {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-around;
+      padding: 1rem;
+    }
+
+    .bottom {
+      display: flex;
+      justify-content: space-around;
+      padding: 1rem;
+
+    }
+  }
+}
+
