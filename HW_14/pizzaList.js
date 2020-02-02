@@ -1,4 +1,4 @@
-const pizzaList = [
+let pizzaList = [
     {
         id : 1,
         img: "images/pizza_01_grill.png",

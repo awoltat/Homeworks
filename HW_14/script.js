@@ -2,9 +2,44 @@ const pizzaCardContainer = document.querySelector('.pizza-info');
 const pizzaCardElement = document.getElementById('pizzaContainer');
 const constructor = document.querySelector('.wrapper-constructor');
 const pizzaConstructorElement = document.getElementsByClassName('constructor')[0];
+const basket = document.querySelector('.wrapper-basket');
+const basketElement = document.querySelector('#buskets');
+const headerBasket = document.querySelector('.header-basket');
 const createPizza = document.getElementsByClassName('create')[0];
 
+
+//________________ 16 ______________//
+// 16.1
+// 16.2 line 218, 388
+const pizzasKey = 'pizzaList';
+const bucketKey = 'bucketList';
+
+let bucketList = [];
+
+if (localStorage.getItem(pizzasKey)) {
+    pizzaList = JSON.parse(localStorage.getItem(pizzasKey));
+} else {
+    localStorage.setItem(pizzasKey, JSON.stringify(pizzaList));
+}
+
+if (localStorage.getItem(bucketKey)) {
+    bucketList = JSON.parse(localStorage.getItem(bucketKey));
+} else {
+    localStorage.setItem(bucketKey, JSON.stringify(bucketList));
+}
+
+/////Дубликат массива с пиццами
+let filteredArr = [...pizzaList];
+
+function refreshDataInLocalStorage() {
+    localStorage.setItem(pizzasKey, JSON.stringify(pizzaList));
+    filteredArr = [...pizzaList];
+}
+console.log(pizzaList);
+
+//______________ END ______________//
 //_________________ 15 _____________//
+
 
 pizzaCardContainer.addEventListener('click', function (e) {
     const elemClassName = e.target.className;
@@ -55,8 +90,9 @@ function onPizzaSaveClick() {
     };
 
     pizzaList.push(newPizzaObj);
-    filteredArr = pizzaList;
+    refreshDataInLocalStorage();
     renderPizza(newPizzaObj);
+
 };
 
 createPizza.onclick = function () {
@@ -70,6 +106,14 @@ constructor.addEventListener('click', function (e) {
     if (elemClassName === 'wrapper-constructor' || elemClassName === 'icon-close') {
         console.log('click');
         constructor.style.display = 'none';
+    }
+});
+
+basket.addEventListener('click', function (e) {
+    const elemClassName = e.target.className;
+    if (elemClassName === 'wrapper-basket' || elemClassName === 'icon-close') {
+        console.log('click');
+        basket.style.display = 'none';
     }
 });
 
@@ -105,76 +149,91 @@ ${pizza.composition.map(composition => {
 const renderPizzaConstructor = () => {
     const template = `
 
-\t\t<div class="exit-btn">
-\t\t\t<a href="#">
-\t\t\t\t<i class="icon-close"></i>
-\t\t\t</a>
-\t\t</div>
-\t\t<h2 class="constructor-title">Конструктор пиццы</h2>
-\t\t<input type="text" class="form-control nameOfNewPizza" placeholder="Введите название пиццы:" required>
-\t\t<button class="btn btn-primary btn-success" id="save-pizza-button" type="button" onclick="onPizzaSaveClick()">Сохранить</button>
-\t\t<div class="content-holder">
-\t\t\t<div class="left-side">
-\t\t\t\t<div class="image-container">
-\t\t\t\t\t<img src="images/01_osnovanie.png" alt="osnovanie" class="img-osnova">
-\t\t\t\t\t<img class="component" src="images/02_sous.png" alt="components">
-\t\t\t\t</div>
-\t\t\t</div>
+        <div class="exit-btn">
+            <a href="#">
+                <i class="icon-close"></i>
+            </a>
+        </div>
+        <h2 class="constructor-title">Конструктор пиццы</h2>
+        <input type="text" class="form-control nameOfNewPizza" placeholder="Введите название пиццы:" required>
+        <button class="btn btn-primary btn-success" id="save-pizza-button" type="button" onclick="onPizzaSaveClick()">Сохранить</button>
+        <div class="content-holder">
+            <div class="left-side">
+                <div class="image-container">
+                    <img src="images/01_osnovanie.png" alt="osnovanie" class="img-osnova">
+                    <img class="component" src="images/02_sous.png" alt="components">
+                </div>
+            </div>
 <div class="right-side">
-\t\t\t\t<div class="top">
-\t\t\t\t\t<div class="left">
-\t\t\t\t\t\t<h5>Выберите соус:</h5>
-\t\t\t\t\t\t<div class="sous-holder">
-\t\t\t\t\t\t\t<label for="2"><input class="check" type="checkbox" id="2" onchange="foo(this)"> Классический</label>
-\t\t\t\t\t\t\t<label for="17"><input class="check" type="checkbox" id="17" onchange="foo(this)"> Соус BBQ</label>
-\t\t\t\t\t\t\t<label for="18"><input class="check" type="checkbox" id="18" onchange="foo(this)"> Соус Рикотта</label>
-\t\t\t\t\t\t</div>
-\t\t\t\t\t</div>
-\t\t\t\t\t<div class="right">
-\t\t\t\t\t\t<h5>Выберите сыр:</h5>
-\t\t\t\t\t\t<div class="cheese-holder">
-\t\t\t\t\t\t\t<label for="3"><input class="check" type="checkbox" id="3" onchange="foo(this)"> Моцарелла</label>
-\t\t\t\t\t\t\t<label for="4"><input class="check" type="checkbox" id="4" onchange="foo(this)"> Чеддар</label>
-\t\t\t\t\t\t\t<label for="5"><input class="check" type="checkbox" id="5" onchange="foo(this)"> Пармезан</label>
-\t\t\t\t\t\t\t<label for="6"><input class="check" type="checkbox" id="6" onchange="foo(this)"> Дорблю</label>
-\t\t\t\t\t\t</div>
-\t\t\t\t\t</div>
-\t\t\t\t</div>
-\t\t\t\t<div class="bottom">
-\t\t\t\t\t<div class="left">
-\t\t\t\t\t\t<h5>Выберите мясо:</h5>
-\t\t\t\t\t\t<div class="meat-holder">
-\t\t\t\t\t\t\t<label for="12"><input class="check" type="checkbox" id="12" onchange="foo(this)"> Пепперони</label>
-\t\t\t\t\t\t\t<label for="13"><input class="check" type="checkbox" id="13" onchange="foo(this)"> Ветчина</label>
-\t\t\t\t\t\t\t<label for="14"><input class="check" type="checkbox" id="14" onchange="foo(this)"> Лосось</label>
-\t\t\t\t\t\t\t<label for="15"><input class="check" type="checkbox" id="15" onchange="foo(this)"> Бекон</label>
-\t\t\t\t\t\t\t<label for="16"><input class="check" type="checkbox" id="16" onchange="foo(this)"> Курица</label>
-\t\t\t\t\t\t</div>
-\t\t\t\t\t</div>
-\t\t\t\t\t<div class="right">
-\t\t\t\t\t\t<h5>Выберите мясо:</h5>
-\t\t\t\t\t\t<div class="veggie-holder">
-\t\t\t\t\t\t\t<label for="7"><input class="check" type="checkbox" id="7" onchange="foo(this)"> Томаты</label>
-\t\t\t\t\t\t\t<label for="8"><input class="check" type="checkbox" id="8" onchange="foo(this)"> Лук</label>
-\t\t\t\t\t\t\t<label for="9"><input class="check" type="checkbox" id="9" onchange="foo(this)"> Кукуруза</label>
-\t\t\t\t\t\t\t<label for="10"><input class="check" type="checkbox" id="10" onchange="foo(this)"> Перец</label>
-\t\t\t\t\t\t\t<label for="11"><input class="check" type="checkbox" id="11" onchange="foo(this)"> Ананас</label>
-\t\t\t\t\t\t</div>
-\t\t\t\t\t</div>
-\t\t\t\t</div>
+                <div class="top">
+                    <div class="left">
+                        <h5>Выберите соус:</h5>
+                        <div class="sous-holder">
+                            <label for="2"><input class="check" type="checkbox" id="2" onchange="foo(this)"> Классический</label>
+                            <label for="17"><input class="check" type="checkbox" id="17" onchange="foo(this)"> Соус BBQ</label>
+                            <label for="18"><input class="check" type="checkbox" id="18" onchange="foo(this)"> Соус Рикотта</label>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <h5>Выберите сыр:</h5>
+                        <div class="cheese-holder">
+                            <label for="3"><input class="check" type="checkbox" id="3" onchange="foo(this)"> Моцарелла</label>
+                            <label for="4"><input class="check" type="checkbox" id="4" onchange="foo(this)"> Чеддар</label>
+                            <label for="5"><input class="check" type="checkbox" id="5" onchange="foo(this)"> Пармезан</label>
+                            <label for="6"><input class="check" type="checkbox" id="6" onchange="foo(this)"> Дорблю</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom">
+                    <div class="left">
+                        <h5>Выберите мясо:</h5>
+                        <div class="meat-holder">
+                            <label for="12"><input class="check" type="checkbox" id="12" onchange="foo(this)"> Пепперони</label>
+                            <label for="13"><input class="check" type="checkbox" id="13" onchange="foo(this)"> Ветчина</label>
+                            <label for="14"><input class="check" type="checkbox" id="14" onchange="foo(this)"> Лосось</label>
+                            <label for="15"><input class="check" type="checkbox" id="15" onchange="foo(this)"> Бекон</label>
+                            <label for="16"><input class="check" type="checkbox" id="16" onchange="foo(this)"> Курица</label>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <h5>Выберите мясо:</h5>
+                        <div class="veggie-holder">
+                            <label for="7"><input class="check" type="checkbox" id="7" onchange="foo(this)"> Томаты</label>
+                            <label for="8"><input class="check" type="checkbox" id="8" onchange="foo(this)"> Лук</label>
+                            <label for="9"><input class="check" type="checkbox" id="9" onchange="foo(this)"> Кукуруза</label>
+                            <label for="10"><input class="check" type="checkbox" id="10" onchange="foo(this)"> Перец</label>
+                            <label for="11"><input class="check" type="checkbox" id="11" onchange="foo(this)"> Ананас</label>
+                        </div>
+                    </div>
+                </div>
 
-\t\t\t</div>
-\t\t</div>
+            </div>
+        </div>
 `;
     pizzaConstructorElement.innerHTML = template;
 };
 renderPizzaConstructor();
 
-
-///////////////////////////////////////////////////////////////////
-
-/////Дубликат массива с пиццами
-let filteredArr = [...pizzaList];
+/////// РЕНДЕР КОРЗИНЫ //////////////////
+const renderBasket = (pizza) => {
+    return `
+        <div class="content">
+            <div class="image">
+                <img src="${pizza.img}" alt="pizza">
+            </div>
+            <div class="info">
+                <p>${pizza.name}</p>
+            </div>
+            <div class="price">
+                <span>${pizza.price} грн</span>
+            </div>
+            <div class="amount">
+                <span>1</span>
+            </div>
+        </div>
+`;
+  //  basketElement.innerHTML = template;
+};
 
 /////// ВЫЗОВ РЕНДЕРА //////////////
 function renderPizzas() {
@@ -193,6 +252,7 @@ let inputCaloryFrom = document.getElementById('calory_from');
 let inputCaloryTo = document.getElementById('calory_to');
 let buttonCaloryItem = document.getElementById('calory_submit-btn');
 let resetButton = document.getElementById('reset');
+
 
 /////// СБРОС ФИЛЬТРОВ //////////////
 resetButton.addEventListener('click', function () { // №3
@@ -325,8 +385,31 @@ const renderPizza = (pizza) => {
 
     });
 
-    button.onclick = function (e) {
-        console.log(this);
+    button.onclick = function (event) {
+        bucketList = JSON.parse(localStorage.getItem(bucketKey));
+        bucketList.push(pizza);
+        console.log(bucketList);
+        let renderResult = '';
+        for (let i = 0; i < bucketList.length; i++) {
+            renderResult += renderBasket(bucketList[i]);
+        }
+
+        basketElement.innerHTML = renderResult;
+        basket.style.display = 'flex';
+        event.stopPropagation();
+
+        localStorage.setItem(bucketKey, JSON.stringify(bucketList));
+    };
+
+    headerBasket.onclick = function () {
+        bucketList = JSON.parse(localStorage.getItem(bucketKey));
+        let renderResult = '';
+        for (let i = 0; i < bucketList.length; i++) {
+            renderResult += renderBasket(bucketList[i]);
+        }
+
+        basketElement.innerHTML = renderResult;
+        basket.style.display = 'flex';
     };
 
     return card;
