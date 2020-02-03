@@ -54,7 +54,7 @@ function foo(compositionCheckboxElement) {
     console.log(compositionCheckboxElement.checked);
 };
 
-/////// СОЗДАНИЕ ПИЦЦЫ //////////////
+/////// СОЗДАНИЕ ПИЦЦЫ /////////////
 function onPizzaSaveClick() {
     let compositionsCheckboxes = []; //массив айди
     for (let i = 0; i < document.getElementsByClassName('check').length; i++) {
