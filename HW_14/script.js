@@ -6,11 +6,13 @@ const basket = document.querySelector('.wrapper-basket');
 const basketElement = document.querySelector('#buskets');
 const headerBasket = document.querySelector('.header-basket');
 const createPizza = document.getElementsByClassName('create')[0];
+let sumAmount = document.getElementsByClassName('sumAmount')[0];
+let sumPrice = document.getElementsByClassName('sumPrice')[0];
 
 
 //________________ 16 ______________//
 // 16.1
-// 16.2 line 218, 388
+// 16.2 line 220, 390
 const pizzasKey = 'pizzaList';
 const bucketKey = 'bucketList';
 
@@ -403,12 +405,16 @@ const renderPizza = (pizza) => {
 
     headerBasket.onclick = function () {
         bucketList = JSON.parse(localStorage.getItem(bucketKey));
+        let result = 0;
         let renderResult = '';
         for (let i = 0; i < bucketList.length; i++) {
             renderResult += renderBasket(bucketList[i]);
+            result += bucketList[i].price;
         }
 
         basketElement.innerHTML = renderResult;
+        sumAmount.innerHTML = String(bucketList.length) + ' pizzas';
+        sumPrice.innerHTML = String(result);
         basket.style.display = 'flex';
     };
 
