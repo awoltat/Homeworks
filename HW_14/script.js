@@ -8,36 +8,26 @@ const headerBasket = document.querySelector('.header-basket');
 const createPizza = document.getElementsByClassName('create')[0];
 let sumAmount = document.getElementsByClassName('sumAmount')[0];
 let sumPrice = document.getElementsByClassName('sumPrice')[0];
-
+let select = document.getElementById('select');
+let inputItem = document.getElementsByClassName('form-control')[0];
+let inputPriceFrom = document.getElementById('from');
+let inputPriceTo = document.getElementById('to');
+let buttonItem = document.getElementById('submit-btn');
+let inputCaloryFrom = document.getElementById('calory_from');
+let inputCaloryTo = document.getElementById('calory_to');
+let buttonCaloryItem = document.getElementById('calory_submit-btn');
+let resetButton = document.getElementById('reset');
 
 //________________ 16 ______________//
 // 16.1
-// 16.2 line 220, 390
-const pizzasKey = 'pizzaList';
-const bucketKey = 'bucketList';
+// 16.2 line 354
 
-let bucketList = [];
+let storage = new Storage();
 
-if (localStorage.getItem(pizzasKey)) {
-    pizzaList = JSON.parse(localStorage.getItem(pizzasKey));
-} else {
-    localStorage.setItem(pizzasKey, JSON.stringify(pizzaList));
-}
-
-if (localStorage.getItem(bucketKey)) {
-    bucketList = JSON.parse(localStorage.getItem(bucketKey));
-} else {
-    localStorage.setItem(bucketKey, JSON.stringify(bucketList));
-}
-
-/////Дубликат массива с пиццами
-let filteredArr = [...pizzaList];
-
-function refreshDataInLocalStorage() {
-    localStorage.setItem(pizzasKey, JSON.stringify(pizzaList));
-    filteredArr = [...pizzaList];
-}
+let bucketList = storage.bucketList;
+pizzaList = storage.pizzaList;
 console.log(pizzaList);
+let filteredArr = [...pizzaList];
 
 //______________ END ______________//
 //_________________ 15 _____________//
@@ -49,10 +39,6 @@ pizzaCardContainer.addEventListener('click', function (e) {
         this.style.display = 'none';
     }
 });
-
-function foo(compositionCheckboxElement) {
-    console.log(compositionCheckboxElement.checked);
-};
 
 /////// СОЗДАНИЕ ПИЦЦЫ /////////////
 function onPizzaSaveClick() {
@@ -92,15 +78,15 @@ function onPizzaSaveClick() {
     };
 
     pizzaList.push(newPizzaObj);
-    refreshDataInLocalStorage();
+    storage.pizzaList = pizzaList;
+    filteredArr = [...pizzaList];
     renderPizza(newPizzaObj);
 
-};
+}
 
 createPizza.onclick = function () {
     renderPizzaConstructor();
     constructor.style.display = 'flex';
-    console.log('Helooooo');
 };
 
 constructor.addEventListener('click', function (e) {
@@ -114,11 +100,9 @@ constructor.addEventListener('click', function (e) {
 basket.addEventListener('click', function (e) {
     const elemClassName = e.target.className;
     if (elemClassName === 'wrapper-basket' || elemClassName === 'icon-close') {
-        console.log('click');
         basket.style.display = 'none';
     }
 });
-
 
 /////// РЕНДЕР ИНФО-КАРТОЧКИ //////////////
 const renderPizzaCard = (pizza) => {
@@ -171,18 +155,18 @@ const renderPizzaConstructor = () => {
                     <div class="left">
                         <h5>Выберите соус:</h5>
                         <div class="sous-holder">
-                            <label for="2"><input class="check" type="checkbox" id="2" onchange="foo(this)"> Классический</label>
-                            <label for="17"><input class="check" type="checkbox" id="17" onchange="foo(this)"> Соус BBQ</label>
-                            <label for="18"><input class="check" type="checkbox" id="18" onchange="foo(this)"> Соус Рикотта</label>
+                            <label for="2"><input class="check" type="checkbox" id="2"> Классический</label>
+                            <label for="17"><input class="check" type="checkbox" id="17" > Соус BBQ</label>
+                            <label for="18"><input class="check" type="checkbox" id="18" > Соус Рикотта</label>
                         </div>
                     </div>
                     <div class="right">
                         <h5>Выберите сыр:</h5>
                         <div class="cheese-holder">
-                            <label for="3"><input class="check" type="checkbox" id="3" onchange="foo(this)"> Моцарелла</label>
-                            <label for="4"><input class="check" type="checkbox" id="4" onchange="foo(this)"> Чеддар</label>
-                            <label for="5"><input class="check" type="checkbox" id="5" onchange="foo(this)"> Пармезан</label>
-                            <label for="6"><input class="check" type="checkbox" id="6" onchange="foo(this)"> Дорблю</label>
+                            <label for="3"><input class="check" type="checkbox" id="3" > Моцарелла</label>
+                            <label for="4"><input class="check" type="checkbox" id="4" > Чеддар</label>
+                            <label for="5"><input class="check" type="checkbox" id="5" > Пармезан</label>
+                            <label for="6"><input class="check" type="checkbox" id="6" > Дорблю</label>
                         </div>
                     </div>
                 </div>
@@ -190,21 +174,21 @@ const renderPizzaConstructor = () => {
                     <div class="left">
                         <h5>Выберите мясо:</h5>
                         <div class="meat-holder">
-                            <label for="12"><input class="check" type="checkbox" id="12" onchange="foo(this)"> Пепперони</label>
-                            <label for="13"><input class="check" type="checkbox" id="13" onchange="foo(this)"> Ветчина</label>
-                            <label for="14"><input class="check" type="checkbox" id="14" onchange="foo(this)"> Лосось</label>
-                            <label for="15"><input class="check" type="checkbox" id="15" onchange="foo(this)"> Бекон</label>
-                            <label for="16"><input class="check" type="checkbox" id="16" onchange="foo(this)"> Курица</label>
+                            <label for="12"><input class="check" type="checkbox" id="12" > Пепперони</label>
+                            <label for="13"><input class="check" type="checkbox" id="13" > Ветчина</label>
+                            <label for="14"><input class="check" type="checkbox" id="14" > Лосось</label>
+                            <label for="15"><input class="check" type="checkbox" id="15" > Бекон</label>
+                            <label for="16"><input class="check" type="checkbox" id="16" > Курица</label>
                         </div>
                     </div>
                     <div class="right">
                         <h5>Выберите мясо:</h5>
                         <div class="veggie-holder">
-                            <label for="7"><input class="check" type="checkbox" id="7" onchange="foo(this)"> Томаты</label>
-                            <label for="8"><input class="check" type="checkbox" id="8" onchange="foo(this)"> Лук</label>
-                            <label for="9"><input class="check" type="checkbox" id="9" onchange="foo(this)"> Кукуруза</label>
-                            <label for="10"><input class="check" type="checkbox" id="10" onchange="foo(this)"> Перец</label>
-                            <label for="11"><input class="check" type="checkbox" id="11" onchange="foo(this)"> Ананас</label>
+                            <label for="7"><input class="check" type="checkbox" id="7" > Томаты</label>
+                            <label for="8"><input class="check" type="checkbox" id="8" > Лук</label>
+                            <label for="9"><input class="check" type="checkbox" id="9" > Кукуруза</label>
+                            <label for="10"><input class="check" type="checkbox" id="10" > Перец</label>
+                            <label for="11"><input class="check" type="checkbox" id="11" > Ананас</label>
                         </div>
                     </div>
                 </div>
@@ -245,17 +229,6 @@ function renderPizzas() {
     }
 }
 
-let select = document.getElementById('select');
-let inputItem = document.getElementsByClassName('form-control')[0];
-let inputPriceFrom = document.getElementById('from');
-let inputPriceTo = document.getElementById('to');
-let buttonItem = document.getElementById('submit-btn');
-let inputCaloryFrom = document.getElementById('calory_from');
-let inputCaloryTo = document.getElementById('calory_to');
-let buttonCaloryItem = document.getElementById('calory_submit-btn');
-let resetButton = document.getElementById('reset');
-
-
 /////// СБРОС ФИЛЬТРОВ //////////////
 resetButton.addEventListener('click', function () { // №3
     inputPriceFrom.value = null;
@@ -281,30 +254,23 @@ buttonCaloryItem.addEventListener('click', function () { // №2, фильтр �
     renderPizzas();
 });
 
-
-function getCompositionElements() {
-    let compos = document.getElementsByClassName('pizza_Compos');
-    return compos;
-}
-
 /////// ПОИСК ПО ИМЕНИ И КОМПОНЕНТАМ //////////////
-inputItem.addEventListener('input', function (e) { // №1
+inputItem.addEventListener('input', function () {
+    function getCompositionElements() {
+        let compos = document.getElementsByClassName('pizza_Compos');
+        return compos;
+    }
     console.log(this.value);
     clearPizzaDom();
     const searchValue = this.value.toLowerCase();
     filteredArr = pizzaList.filter(pizza => {
         let pizzaNameCondition = pizza.name.toLowerCase().includes(searchValue);
-
         let foundCompositions = pizza.composition.filter(pizzaComposition =>
             pizzaComposition.toLowerCase().includes(searchValue));
-
         let compositionsCondition = foundCompositions.length > 0;
-
         return pizzaNameCondition || compositionsCondition;
     });
-
     renderPizzas();
-
     let compElements = getCompositionElements();
     for (let i = 0; i < compElements.length; i++) {
         const spanStr = '<span>Состав: </span>';
@@ -316,12 +282,10 @@ inputItem.addEventListener('input', function (e) { // №1
     }
 });
 
-
 /////// ОЧИСТКА DOM //////////////
 function clearPizzaDom() { //функция очистки
     document.getElementsByClassName('menu')[0].innerHTML = '';
 }
-
 
 /////// РЕНДЕР ПИЦЦ //////////////
 const renderPizza = (pizza) => {
@@ -388,9 +352,8 @@ const renderPizza = (pizza) => {
     });
 
     button.onclick = function (event) {
-        bucketList = JSON.parse(localStorage.getItem(bucketKey));
+        bucketList = storage.bucketList;
         bucketList.push(pizza);
-        console.log(bucketList);
         let renderResult = '';
         for (let i = 0; i < bucketList.length; i++) {
             renderResult += renderBasket(bucketList[i]);
@@ -400,11 +363,11 @@ const renderPizza = (pizza) => {
         basket.style.display = 'flex';
         event.stopPropagation();
 
-        localStorage.setItem(bucketKey, JSON.stringify(bucketList));
+        storage.bucketList = bucketList;
     };
 
     headerBasket.onclick = function () {
-        bucketList = JSON.parse(localStorage.getItem(bucketKey));
+        bucketList = storage.bucketList;
         let result = 0;
         let renderResult = '';
         for (let i = 0; i < bucketList.length; i++) {
