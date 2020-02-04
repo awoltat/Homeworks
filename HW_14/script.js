@@ -19,7 +19,7 @@ let buttonCaloryItem = document.getElementById('calory_submit-btn');
 let resetButton = document.getElementById('reset');
 
 //________________ 16 ______________//
-// 16.1
+// 16.1 line 80
 // 16.2 line 354
 
 let storage = new Storage();
