@@ -19,19 +19,13 @@ let buttonCaloryItem = document.getElementById('calory_submit-btn');
 let resetButton = document.getElementById('reset');
 
 //________________ 16 ______________//
-// 16.1 line 80
-// 16.2 line 354
-
 let storage = new Storage();
-
 let bucketList = storage.bucketList;
 pizzaList = storage.pizzaList;
 console.log(pizzaList);
 let filteredArr = [...pizzaList];
-
 //______________ END ______________//
 //_________________ 15 _____________//
-
 
 pizzaCardContainer.addEventListener('click', function (e) {
     const elemClassName = e.target.className;
@@ -72,7 +66,7 @@ function onPizzaSaveClick() {
         name: pizzaName,
         caloricity: pizzaCaloricity,
         price: pizzaPrice,
-        img: 'images/pizza_12',
+        img: 'images/13_ham.png',
         composition: compositionNames,
         isSelfCreated: true,
     };
@@ -89,6 +83,9 @@ createPizza.onclick = function () {
     constructor.style.display = 'flex';
 };
 
+/**
+ * This method ...
+ */
 constructor.addEventListener('click', function (e) {
     const elemClassName = e.target.className;
     if (elemClassName === 'wrapper-constructor' || elemClassName === 'icon-close') {
@@ -133,9 +130,7 @@ ${pizza.composition.map(composition => {
 
 /////// РЕНДЕР КОНСТРУКТОРА //////////////
 const renderPizzaConstructor = () => {
-    const template = `
-
-        <div class="exit-btn">
+    const template = ` <div class="exit-btn">
             <a href="#">
                 <i class="icon-close"></i>
             </a>
@@ -150,7 +145,7 @@ const renderPizzaConstructor = () => {
                     <img class="component" src="images/02_sous.png" alt="components">
                 </div>
             </div>
-<div class="right-side">
+        <div class="right-side">
                 <div class="top">
                     <div class="left">
                         <h5>Выберите соус:</h5>
@@ -174,7 +169,7 @@ const renderPizzaConstructor = () => {
                     <div class="left">
                         <h5>Выберите мясо:</h5>
                         <div class="meat-holder">
-                            <label for="12"><input class="check" type="checkbox" id="12" > Пепперони</label>
+                            <label for="12"><input class="check" type="checkbox" id="12">Пепперони</label>
                             <label for="13"><input class="check" type="checkbox" id="13" > Ветчина</label>
                             <label for="14"><input class="check" type="checkbox" id="14" > Лосось</label>
                             <label for="15"><input class="check" type="checkbox" id="15" > Бекон</label>
@@ -201,7 +196,8 @@ const renderPizzaConstructor = () => {
 renderPizzaConstructor();
 
 /////// РЕНДЕР КОРЗИНЫ //////////////////
-const renderBasket = (pizza) => {
+const renderBasket = (pizzas) => {
+    let pizza = pizzas[0];
     return `
         <div class="content">
             <div class="image">
@@ -214,11 +210,9 @@ const renderBasket = (pizza) => {
                 <span>${pizza.price} грн</span>
             </div>
             <div class="amount">
-                <span>1</span>
+                <span>${pizzas.length}</span>
             </div>
-        </div>
-`;
-  //  basketElement.innerHTML = template;
+        </div>`;
 };
 
 /////// ВЫЗОВ РЕНДЕРА //////////////
@@ -260,6 +254,7 @@ inputItem.addEventListener('input', function () {
         let compos = document.getElementsByClassName('pizza_Compos');
         return compos;
     }
+
     console.log(this.value);
     clearPizzaDom();
     const searchValue = this.value.toLowerCase();
@@ -304,7 +299,7 @@ const renderPizza = (pizza) => {
     img.innerHTML = `<img src=${pizza.img} alt="pizza">`;
     img.classList.add('pizza-card');
     card.appendChild(img);
-    // name
+    // name-
     const pizzaName = document.createElement('div');
     pizzaName.className = 'pizza_Name';
     pizzaName.innerHTML = '<h6>' + pizza.name + '</h6>';
@@ -351,9 +346,28 @@ const renderPizza = (pizza) => {
 
     });
 
+    /***
+     * Homework 17
+     * Сreated a multidimensional array,
+     * that helps to find out how many copies of pizza were ordered
+     */
+
     button.onclick = function (event) {
         bucketList = storage.bucketList;
-        bucketList.push(pizza);
+        console.log(bucketList);
+
+        let isFirstElement = true;
+        for (let i = 0; i < bucketList.length; i++) {
+            if (bucketList[i][0].id === pizza.id) {
+                bucketList[i].push(pizza);
+                isFirstElement = false;
+                break;
+            }
+        }
+
+        if (isFirstElement) {
+            bucketList.push([pizza]);
+        }
         let renderResult = '';
         for (let i = 0; i < bucketList.length; i++) {
             renderResult += renderBasket(bucketList[i]);
@@ -368,16 +382,21 @@ const renderPizza = (pizza) => {
 
     headerBasket.onclick = function () {
         bucketList = storage.bucketList;
-        let result = 0;
+        let price = 0;
+        let pizzasAmount = 0;
         let renderResult = '';
         for (let i = 0; i < bucketList.length; i++) {
             renderResult += renderBasket(bucketList[i]);
-            result += bucketList[i].price;
+            price += bucketList[i][0].price * bucketList[i].length;
+            pizzasAmount += bucketList[i].length;
         }
 
+        storage.pizzasPrice = price;
+        storage.pizzasCount = bucketList.length;
+
         basketElement.innerHTML = renderResult;
-        sumAmount.innerHTML = String(bucketList.length) + ' pizzas';
-        sumPrice.innerHTML = String(result);
+        sumAmount.innerHTML = String(pizzasAmount) + ' pizzas';
+        sumPrice.innerHTML = String(price);
         basket.style.display = 'flex';
     };
 
@@ -390,7 +409,6 @@ renderPizzas();
 select.onchange = function () {
     const newArr = [...pizzaList];
     newArr.sort((a, b) => {
-        // if (this.value === '0') return newArr = [...pizzaList]''
         if (a.price < b.price) return this.value === '1' ? -1 : 1;
         if (a.price > b.price) return this.value === '1' ? 1 : -1;
         if (a.price === b.price) return 0
@@ -399,6 +417,8 @@ select.onchange = function () {
     clearPizzaDom();
     renderPizzas();
 };
+
+
 
 
 
