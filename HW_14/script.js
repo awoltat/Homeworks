@@ -71,10 +71,10 @@ function onPizzaSaveClick() {
         isSelfCreated: true,
     };
 
-    pizzaList.push(newPizzaObj);
-    storage.pizzaList = pizzaList;
-    filteredArr = [...pizzaList];
-    renderPizza(newPizzaObj);
+    pizzaList.push(newPizzaObj); // это твоя созданная пицца
+    storage.pizzaList = pizzaList; // это гет-запрос с локал-стораджа
+    filteredArr = [...pizzaList]; // это массив-копия куда я передаю обновленный пицца-лист
+
 
 }
 
@@ -83,9 +83,6 @@ createPizza.onclick = function () {
     constructor.style.display = 'flex';
 };
 
-/**
- * This method ...
- */
 constructor.addEventListener('click', function (e) {
     const elemClassName = e.target.className;
     if (elemClassName === 'wrapper-constructor' || elemClassName === 'icon-close') {
@@ -392,7 +389,7 @@ const renderPizza = (pizza) => {
         }
 
         storage.pizzasPrice = price;
-        storage.pizzasCount = bucketList.length;
+        storage.pizzasCount = pizzasAmount;
 
         basketElement.innerHTML = renderResult;
         sumAmount.innerHTML = String(pizzasAmount) + ' pizzas';
